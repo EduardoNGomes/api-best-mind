@@ -1,5 +1,5 @@
 import { InMemoryProductsRepository } from '@/repositories/test/InMemoryProductsRepository'
-import { CreateProductService } from './create'
+import { CreateProductService } from './Create'
 
 let sut: CreateProductService
 let inMemoryProductsRepository: InMemoryProductsRepository
