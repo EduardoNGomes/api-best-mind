@@ -32,6 +32,14 @@ export class InMemoryProductsRepository implements ProductRepository {
     return product
   }
 
+  async findByName(name: string): Promise<Products | null> {
+    const product = this.items.find((product) => product.name === name)
+
+    if (!product) return null
+
+    return product
+  }
+
   async delete(id: string): Promise<void> {
     this.items = this.items.filter((product) => product.id !== id)
   }

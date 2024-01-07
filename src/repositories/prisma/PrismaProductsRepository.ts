@@ -28,6 +28,12 @@ export class PrismaProductsRepository implements ProductRepository {
     return product
   }
 
+  async findByName(name: string): Promise<Products | null> {
+    const product = await this.prisma.products.findUnique({ where: { name } })
+
+    return product
+  }
+
   async delete(id: string): Promise<void> {
     await this.prisma.products.delete({ where: { id } })
   }

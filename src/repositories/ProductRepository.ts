@@ -14,5 +14,6 @@ export abstract class ProductRepository {
   abstract update(data: ProductToUpdateProps): Promise<void>
   abstract findAll(): Promise<Products[] | []>
   abstract findById(id: string): Promise<Products | null>
+  abstract findByName(name: string): Promise<Products | null>
   abstract delete(id: string): Promise<void>
 }
