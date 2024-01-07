@@ -20,7 +20,7 @@ describe('Find All Products', () => {
     }
   })
 
-  it('should create a new product', async () => {
+  it('should find all exists product', async () => {
     const result = await sut.execute()
 
     expect(result.isRight()).toBeTruthy()
