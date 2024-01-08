@@ -16,7 +16,7 @@ describe('Find Product by id', () => {
 
     sut = new FindProductByIdService(inMemoryProductsRepository)
 
-    product = ProductFactory.createProductToUniteTest({ id })
+    product = ProductFactory.createProductToUnitTest({ id })
 
     inMemoryProductsRepository.items.push(product)
   })

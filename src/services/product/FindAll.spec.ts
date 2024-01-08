@@ -14,7 +14,7 @@ describe('Find All Products', () => {
     let product: Products
 
     for (let i = 0; i < 10; i++) {
-      product = ProductFactory.createProductToUniteTest({ id: `${i}` })
+      product = ProductFactory.createProductToUnitTest({ id: `${i}` })
 
       inMemoryProductsRepository.items.push(product)
     }

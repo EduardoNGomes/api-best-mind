@@ -21,11 +21,16 @@ export class InMemoryProductsRepository implements ProductRepository {
     const productIndex = this.items.findIndex((item) => item.id === data.id)
     const updatedAt = new Date()
 
-    this.items[productIndex] = {
-      ...this.items[productIndex],
-      ...data,
+    const newProduct: Products = {
+      id: this.items[productIndex].id,
+      name: data.name ?? this.items[productIndex].name,
+      createdAt: this.items[productIndex].createdAt,
+      description: data.description ?? this.items[productIndex].description,
+      price: data.price ?? this.items[productIndex].price,
       updatedAt,
     }
+
+    this.items[productIndex] = newProduct
   }
 
   async findAll(): Promise<[] | Products[]> {

@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto'
 import { faker } from '@faker-js/faker'
 
 class ProductFactory {
-  createProductToUniteTest(data: Partial<ProductToCreateProps>) {
+  createProductToUnitTest(data: Partial<ProductToCreateProps>) {
     const product = {
       id: data.id ?? randomUUID(),
       name: data.name ?? faker.word.noun(),

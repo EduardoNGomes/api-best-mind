@@ -16,7 +16,7 @@ describe('Delete Product by id', () => {
 
     sut = new DeleteProductService(inMemoryProductsRepository)
 
-    product = ProductFactory.createProductToUniteTest({ id })
+    product = ProductFactory.createProductToUnitTest({ id })
 
     inMemoryProductsRepository.items.push(product)
   })

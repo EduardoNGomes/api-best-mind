@@ -1,10 +1,46 @@
-@baseUrl = http://localhost:8080
+@baseUrl = http://localhost:3333
 
-# @name create_manager
+# @name create_product
 
 POST {{baseUrl}}/product
 Content-Type: application/json
 
 {
-
+  "name":"product 1",
+  "description":"Product 1 description",
+  "price":10
 }
+
+#####
+
+# @name find_product
+
+GET  {{baseUrl}}/product/38f3f766-8508-432a-af67-b8d5ff9e767d
+Content-Type: application/json
+
+
+#####
+
+# @name find_all_product
+
+GET  {{baseUrl}}/product
+Content-Type: application/json
+
+#####
+
+# @name delete_product
+
+DELETE {{baseUrl}}/product/38f3f766-8508-432a-af67-b8d5ff9e767d
+Content-Type: application/json
+
+#####
+
+# @name create_product
+
+PUT {{baseUrl}}/product/ccc94124-0c8c-41bd-84bd-535e1632438b
+Content-Type: application/json
+
+{
+  "name":"product 10"
+}
+
