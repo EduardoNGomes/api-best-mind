@@ -1,11 +1,9 @@
 import fastify from 'fastify'
+import { Routes } from './http/routes'
 
 const app = fastify()
 
-app.get('/', (req, reply) => {
-  console.log('hello world')
-  return reply.status(200).send()
-})
+app.register(Routes)
 
 app.listen({ port: 8080 }).then(() => {
   console.log('server is running')
