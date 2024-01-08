@@ -5,7 +5,7 @@ import { ResourceAlreadyExistError } from '../erros/ResourceAlreadyExistError'
 type CreateProductRequest = {
   name: string
   description: string
-  price: string
+  price: number
 }
 
 type CreateProductResponse = Either<ResourceAlreadyExistError, object>

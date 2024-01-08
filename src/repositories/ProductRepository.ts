@@ -6,7 +6,7 @@ export type ProductToUpdateProps = {
   id: string
   name?: string
   description?: string
-  price?: string
+  price?: number
 }
 
 export abstract class ProductRepository {

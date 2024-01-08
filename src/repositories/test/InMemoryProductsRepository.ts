@@ -11,13 +11,21 @@ export class InMemoryProductsRepository implements ProductRepository {
 
   async create(data: ProductToCreateProps): Promise<void> {
     const id = randomUUID()
-    this.items.push({ id, ...data })
+    const createdAt = new Date()
+    const updatedAt = new Date()
+
+    this.items.push({ id, ...data, createdAt, updatedAt })
   }
 
   async update(data: ProductToUpdateProps): Promise<void> {
     const productIndex = this.items.findIndex((item) => item.id === data.id)
+    const updatedAt = new Date()
 
-    this.items[productIndex] = { ...this.items[productIndex], ...data }
+    this.items[productIndex] = {
+      ...this.items[productIndex],
+      ...data,
+      updatedAt,
+    }
   }
 
   async findAll(): Promise<[] | Products[]> {

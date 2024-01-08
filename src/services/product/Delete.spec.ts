@@ -16,7 +16,9 @@ describe('Delete Product by id', () => {
       id,
       name: 'New Product',
       description: 'New Product description',
-      price: '10',
+      price: 10,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     })
   })
 

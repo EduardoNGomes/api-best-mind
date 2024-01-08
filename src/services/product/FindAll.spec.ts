@@ -15,7 +15,9 @@ describe('Find All Products', () => {
         id: `${i}`,
         name: `New Product-${i}`,
         description: 'New Product description',
-        price: '10',
+        price: 10,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       })
     }
   })

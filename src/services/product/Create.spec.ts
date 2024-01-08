@@ -15,7 +15,7 @@ describe('Create Product', () => {
     const newProduct = {
       name: 'New Product',
       description: 'New Product description',
-      price: '10',
+      price: 10,
     }
 
     const result = await sut.execute(newProduct)
@@ -27,7 +27,7 @@ describe('Create Product', () => {
         id: expect.any(String),
         name: 'New Product',
         description: 'New Product description',
-        price: '10',
+        price: 10,
       }),
     )
   })
@@ -35,7 +35,7 @@ describe('Create Product', () => {
     const newProduct = {
       name: 'New Product',
       description: 'New Product description',
-      price: '10',
+      price: 10,
     }
 
     await sut.execute(newProduct)
