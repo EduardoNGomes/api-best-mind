@@ -1,10 +1,14 @@
 import { InMemoryProductsRepository } from '@/repositories/test/InMemoryProductsRepository'
 import { DeleteProductService } from './Delete'
+import { Products } from '@prisma/client'
+import ProductFactory from '../../../test/factories/product'
+import { randomUUID } from 'crypto'
 
 let sut: DeleteProductService
 let inMemoryProductsRepository: InMemoryProductsRepository
+let product: Products
 
-const id = 'test-id'
+const id = randomUUID()
 
 describe('Delete Product by id', () => {
   beforeAll(() => {
@@ -12,14 +16,9 @@ describe('Delete Product by id', () => {
 
     sut = new DeleteProductService(inMemoryProductsRepository)
 
-    inMemoryProductsRepository.items.push({
-      id,
-      name: 'New Product',
-      description: 'New Product description',
-      price: 10,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    })
+    product = ProductFactory.createProductToUniteTest({ id })
+
+    inMemoryProductsRepository.items.push(product)
   })
 
   it('should delete a product', async () => {
@@ -31,7 +30,7 @@ describe('Delete Product by id', () => {
     expect(inMemoryProductsRepository.items).toHaveLength(0)
   })
   it('shouldnt delete a product if id was wrong', async () => {
-    const result = await sut.execute({ id: 'error id' })
+    const result = await sut.execute({ id })
 
     expect(result.isLeft()).toBeTruthy()
   })

@@ -1,5 +1,7 @@
 import { InMemoryProductsRepository } from '@/repositories/test/InMemoryProductsRepository'
 import { FindAllProductService } from './FindAll'
+import ProductFactory from '../../../test/factories/product'
+import { Products } from '@prisma/client'
 
 let sut: FindAllProductService
 let inMemoryProductsRepository: InMemoryProductsRepository
@@ -9,16 +11,12 @@ describe('Find All Products', () => {
     inMemoryProductsRepository = new InMemoryProductsRepository()
 
     sut = new FindAllProductService(inMemoryProductsRepository)
+    let product: Products
 
     for (let i = 0; i < 10; i++) {
-      inMemoryProductsRepository.items.push({
-        id: `${i}`,
-        name: `New Product-${i}`,
-        description: 'New Product description',
-        price: 10,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
+      product = ProductFactory.createProductToUniteTest({ id: `${i}` })
+
+      inMemoryProductsRepository.items.push(product)
     }
   })
 
