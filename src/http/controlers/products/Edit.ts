@@ -1,6 +1,7 @@
 import { PrismaProductsRepository } from '@/repositories/prisma/PrismaProductsRepository'
 import { prisma } from '@/repositories/prisma/connection'
 import { EditProductService } from '@/services/product/Edit'
+import { UploaderMulter } from '@/storage/multer/UploaderMulter'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -16,19 +17,25 @@ export async function EditProductController(
     description: z.string().optional(),
     price: z.coerce.number().optional(),
   })
+  const createProductFileSchema = z.object({
+    filename: z.string().optional(),
+  })
 
   const { id } = EditProductParamsSchema.parse(request.params)
   const { name, description, price } = EditProductBodySchema.parse(request.body)
+  const { filename } = createProductFileSchema.parse(request.file)
 
   const repository = new PrismaProductsRepository(prisma)
+  const uploader = new UploaderMulter()
 
-  const service = new EditProductService(repository)
+  const service = new EditProductService(repository, uploader)
 
   const result = await service.execute({
     id,
     name,
     description,
     price,
+    image: filename,
   })
 
   if (result.isLeft()) {

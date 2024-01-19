@@ -18,5 +18,9 @@ export async function productsRoutes(app: FastifyInstance) {
   app.get('/product', FindAllProductsController)
   app.get('/product/:id', FindProductByIdController)
   app.delete('/product/:id', DeleteProductController)
-  app.put('/product/:id', EditProductController)
+  app.put(
+    '/product/:id',
+    { preHandler: upload.single('image') },
+    EditProductController,
+  )
 }
