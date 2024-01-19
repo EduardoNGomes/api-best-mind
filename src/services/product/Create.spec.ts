@@ -1,14 +1,17 @@
 import { InMemoryProductsRepository } from '@/repositories/test/InMemoryProductsRepository'
 import { CreateProductService } from './Create'
+import { UploaderTest } from '@/storage/test/UploaderTest'
 
 let sut: CreateProductService
 let inMemoryProductsRepository: InMemoryProductsRepository
+let uploaderTest: UploaderTest
 
 describe('Create Product', () => {
   beforeAll(() => {
     inMemoryProductsRepository = new InMemoryProductsRepository()
+    uploaderTest = new UploaderTest()
 
-    sut = new CreateProductService(inMemoryProductsRepository)
+    sut = new CreateProductService(inMemoryProductsRepository, uploaderTest)
   })
 
   it('should create a new product', async () => {
@@ -16,6 +19,7 @@ describe('Create Product', () => {
       name: 'New Product',
       description: 'New Product description',
       price: 10,
+      image: 'image-product.jpg',
     }
 
     const result = await sut.execute(newProduct)
@@ -36,6 +40,7 @@ describe('Create Product', () => {
       name: 'New Product',
       description: 'New Product description',
       price: 10,
+      image: 'image-product.jpg',
     }
 
     await sut.execute(newProduct)

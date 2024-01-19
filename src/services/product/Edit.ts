@@ -1,30 +1,49 @@
 import { Either, left, right } from '@/erros/either'
 import { ProductRepository } from '@/repositories/ProductRepository'
 import { ResourceNotFoundError } from '../erros/ResourceNotFoundError'
+import { Uploader } from '@/storage/uploader'
 
 type EditProductRequest = {
   id: string
   name?: string
   description?: string
   price?: number
+  image?: string
 }
 
 type EditProductResponse = Either<ResourceNotFoundError, object>
 
 export class EditProductService {
-  constructor(private productRepository: ProductRepository) {}
+  constructor(
+    private productRepository: ProductRepository,
+    private uploader: Uploader,
+  ) {}
 
   async execute({
     id,
     name,
     description,
     price,
+    image,
   }: EditProductRequest): Promise<EditProductResponse> {
-    const products = await this.productRepository.findById(id)
+    const product = await this.productRepository.findById(id)
 
-    if (!products) return left(new ResourceNotFoundError())
+    if (!product) return left(new ResourceNotFoundError())
 
-    await this.productRepository.update({ id, name, description, price })
+    let imageUpdated
+
+    if (image) {
+      await this.uploader.delete(product.image)
+      imageUpdated = await this.uploader.save(image)
+    }
+
+    await this.productRepository.update({
+      id,
+      name,
+      description,
+      price,
+      image: imageUpdated,
+    })
 
     return right({})
   }

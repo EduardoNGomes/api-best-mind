@@ -3,18 +3,21 @@ import { DeleteProductService } from './Delete'
 import { Products } from '@prisma/client'
 import ProductFactory from '../../../test/factories/product'
 import { randomUUID } from 'crypto'
+import { UploaderTest } from '@/storage/test/UploaderTest'
 
 let sut: DeleteProductService
 let inMemoryProductsRepository: InMemoryProductsRepository
 let product: Products
+let uploaderTest: UploaderTest
 
 const id = randomUUID()
 
 describe('Delete Product by id', () => {
   beforeAll(() => {
     inMemoryProductsRepository = new InMemoryProductsRepository()
+    uploaderTest = new UploaderTest()
 
-    sut = new DeleteProductService(inMemoryProductsRepository)
+    sut = new DeleteProductService(inMemoryProductsRepository, uploaderTest)
 
     product = ProductFactory.createProductToUnitTest({ id })
 

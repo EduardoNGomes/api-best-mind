@@ -27,6 +27,7 @@ export class InMemoryProductsRepository implements ProductRepository {
       createdAt: this.items[productIndex].createdAt,
       description: data.description ?? this.items[productIndex].description,
       price: data.price ?? this.items[productIndex].price,
+      image: data.image ?? this.items[productIndex].image,
       updatedAt,
     }
 

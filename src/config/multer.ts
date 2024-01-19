@@ -2,7 +2,7 @@ import multer from 'fastify-multer'
 import { resolve } from 'path'
 import crypto from 'crypto'
 
-export const TMP_FOLDER = resolve(__dirname, '..', '..', '..', 'tmp')
+export const TMP_FOLDER = resolve(__dirname, '..', '..', 'tmp')
 export const UPLOADS_FOLDER = resolve(TMP_FOLDER, 'uploads')
 
 export const MULTER = {

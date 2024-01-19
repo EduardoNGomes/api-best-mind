@@ -1,6 +1,7 @@
 import { Either, left, right } from '@/erros/either'
 import { ProductRepository } from '@/repositories/ProductRepository'
 import { ResourceNotFoundError } from '../erros/ResourceNotFoundError'
+import { Uploader } from '@/storage/uploader'
 
 type DeleteProductRequest = {
   id: string
@@ -9,13 +10,17 @@ type DeleteProductRequest = {
 type DeleteProductResponse = Either<ResourceNotFoundError, object>
 
 export class DeleteProductService {
-  constructor(private productRepository: ProductRepository) {}
+  constructor(
+    private productRepository: ProductRepository,
+    private uploader: Uploader,
+  ) {}
 
   async execute({ id }: DeleteProductRequest): Promise<DeleteProductResponse> {
-    const productsExist = await this.productRepository.findById(id)
+    const product = await this.productRepository.findById(id)
 
-    if (!productsExist) return left(new ResourceNotFoundError())
+    if (!product) return left(new ResourceNotFoundError())
 
+    await this.uploader.delete(product.image)
     await this.productRepository.delete(id)
 
     return right({})
