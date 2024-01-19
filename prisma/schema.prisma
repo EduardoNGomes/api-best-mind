@@ -21,3 +21,13 @@ model Products {
 
   @@map("products")
 }
+
+model Users {
+  id        String   @id() @default(uuid())
+  email     String   @unique()
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  @@map("Users")
+}
