@@ -7,7 +7,8 @@ class UserFactory {
     const user = {
       id: data.id ?? randomUUID(),
       name: data.name ?? faker.word.words(1),
-      password: data.password ?? faker.internet.password(),
+      password:
+        data.password + '-hashed' ?? faker.internet.password() + '-hashed',
       email: data.email ?? faker.internet.email(),
       createdAt: (data.createdAt as Date) ?? faker.date.anytime(),
       updatedAt: (data.updatedAt as Date) ?? faker.date.anytime(),
