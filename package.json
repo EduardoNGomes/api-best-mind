@@ -7,6 +7,7 @@
     "dev": "tsx --watch ./src/server.ts",
     "test": "vitest --run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "migrate": "pnpm prisma migrate dev",
     "lint": "eslint src --fix"
   },
@@ -17,6 +18,7 @@
     "@faker-js/faker": "^8.3.1",
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/node": "^20.10.6",
+    "@vitest/coverage-v8": "^1.2.1",
     "eslint": "^8.56.0",
     "prisma": "^5.7.1",
     "tsup": "^8.0.1",
