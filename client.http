@@ -60,3 +60,45 @@ Content-Type: image/jpeg
 < ./assets/headphone.jpg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
+#####
+
+# @name create_user
+
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "johndoe@email.com",
+  "password": "123456"
+}
+
+#####
+# @name find_user
+
+GET {{baseUrl}}/user/7902ef55-379a-4497-9475-a5e2a296857a
+Content-Type: application/json
+
+
+#####
+
+# @name edit_user
+
+PUT {{baseUrl}}/user/7902ef55-379a-4497-9475-a5e2a296857a
+Content-Type: application/json
+
+{
+  "name": "Joao de Deus",
+  "oldPassword":"123456"
+}
+
+#####
+
+# @name edit_user
+
+DELETE  {{baseUrl}}/user/7902ef55-379a-4497-9475-a5e2a296857a
+Content-Type: application/json
+
+
+
+#####

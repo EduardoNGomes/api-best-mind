@@ -11,7 +11,7 @@ export const envSchema = z.object({
   DATABASE_URL: z.string(),
   NODE_ENV: z.enum(['dev', 'production', 'test']).default('dev'),
   PORT: z.coerce.number().default(3333),
-  SECRETE_KEY: z.string(),
+  SECRET_KEY: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

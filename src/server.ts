@@ -11,7 +11,7 @@ export const app = fastify()
 
 app.register(multer.contentParser)
 app.register(JWT, {
-  secret: env.SECRETE_KEY,
+  secret: env.SECRET_KEY,
 })
 app.register(Routes)
 
