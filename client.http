@@ -99,6 +99,14 @@ Content-Type: application/json
 DELETE  {{baseUrl}}/user/7902ef55-379a-4497-9475-a5e2a296857a
 Content-Type: application/json
 
-
-
 #####
+
+# @name authenticate_user
+
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+  "email": "johndoe@email.com",
+  "password": "123456"
+}

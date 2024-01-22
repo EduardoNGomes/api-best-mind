@@ -11,7 +11,7 @@ type AuthenticateUserRequest = {
 
 type AuthenticateUserResponse = Either<
   WrongCredentialsError,
-  { accessToken: { token: string } }
+  { accessToken: string }
 >
 
 export class AuthenticateUserService {
@@ -33,8 +33,8 @@ export class AuthenticateUserService {
 
     if (!isUserValid) return left(new WrongCredentialsError())
 
-    const token = await this.encrypter.encrypt({ sub: user.id })
+    const accessToken = await this.encrypter.encrypt({ sub: user.id })
 
-    return right({ accessToken: { token } })
+    return right({ accessToken })
   }
 }
