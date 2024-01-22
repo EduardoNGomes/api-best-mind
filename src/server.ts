@@ -18,7 +18,3 @@ app.register(Routes)
 app.register(staticFiles, {
   root: join(UPLOADS_FOLDER),
 })
-
-app.listen({ port: env.PORT }).then(() => {
-  console.log('server is running on port ' + env.PORT)
-})

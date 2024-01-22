@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
-import { productsRoutes } from '../controlers/products'
-import { usersRoutes } from '../controlers/users'
-import { authenticateRoutes } from '../controlers/authenticate'
+import { productsRoutes } from '../controllers/products'
+import { usersRoutes } from '../controllers/users'
+import { authenticateRoutes } from '../controllers/authenticate'
 
 export async function Routes(app: FastifyInstance) {
   app.register(productsRoutes)
