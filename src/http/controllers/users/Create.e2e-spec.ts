@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { app } from '@/server'
 
-describe('[E2E]/user ', async () => {
+describe('[POST]/user ', async () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -10,7 +10,7 @@ describe('[E2E]/user ', async () => {
     await app.close()
   })
 
-  it('should create an state', async () => {
+  it('should create user', async () => {
     const response = await request(app.server).post('/user').send({
       email: 'johnDoe@email.com',
       password: '123456',

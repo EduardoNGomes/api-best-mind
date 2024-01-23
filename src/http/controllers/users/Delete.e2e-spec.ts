@@ -6,7 +6,7 @@ import { prisma } from '@/repositories/prisma/connection'
 
 let MockUser: Users
 
-describe('[POST]/auth ', async () => {
+describe('[DELETE]/user/:id', async () => {
   beforeAll(async () => {
     await app.ready()
 
@@ -22,11 +22,9 @@ describe('[POST]/auth ', async () => {
     await app.close()
   })
 
-  it('should authenticate user', async () => {
-    const response = await request(app.server)
-      .post('/auth')
-      .send({ email: MockUser.email, password: '123456' })
+  it('should delete user', async () => {
+    const response = await request(app.server).delete(`/user/${MockUser.id}`)
 
-    expect(response.body).toHaveProperty('accessToken')
+    expect(response.status).toEqual(200)
   })
 })
