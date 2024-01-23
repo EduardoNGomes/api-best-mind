@@ -4,10 +4,13 @@ import tsConfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   test: {
-    include: ['**/*.e2e-spec.ts'],
     globals: true,
     root: './',
-    setupFiles: ['./test/setup-e2e.ts'],
+    include: ['**/*.e2e-spec.ts'],
+    environmentMatchGlobs: [
+      ['src/http/controllers/**', './vitest-environment-prisma/prisma'],
+    ],
+    dir: 'src',
   },
   plugins: [
     tsConfigPaths(),

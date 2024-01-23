@@ -1,6 +1,7 @@
 import { PrismaProductsRepository } from '@/repositories/prisma/PrismaProductsRepository'
 import { prisma } from '@/repositories/prisma/connection'
 import { DeleteProductService } from '@/services/product/Delete'
+import { UploaderMulter } from '@/storage/multer/UploaderMulter'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -15,8 +16,9 @@ export async function DeleteProductController(
   const { id } = DeleteProductBodySchema.parse(request.params)
 
   const repository = new PrismaProductsRepository(prisma)
+  const uploader = new UploaderMulter()
 
-  const service = new DeleteProductService(repository)
+  const service = new DeleteProductService(repository, uploader)
 
   const result = await service.execute({
     id,
