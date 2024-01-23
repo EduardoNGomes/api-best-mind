@@ -24,7 +24,7 @@ class ProductFactory {
       id: data.id ?? randomUUID(),
       name: data.name ?? faker.word.words(1),
       description: data.description ?? faker.lorem.lines(1),
-      price: data.price ?? faker.number.int(),
+      price: data.price ?? faker.number.int({ min: 1, max: 100 }),
       image: data.image ?? faker.word.words(1),
       createdAt: (data.createdAt as Date) ?? undefined,
       updatedAt: (data.updatedAt as Date) ?? undefined,
