@@ -28,26 +28,28 @@ export class InMemoryProductsRepository implements ProductRepository {
       description: data.description ?? this.items[productIndex].description,
       price: data.price ?? this.items[productIndex].price,
       image: data.image ?? this.items[productIndex].image,
+      user_Id: this.items[productIndex].user_Id,
       updatedAt,
     }
 
     this.items[productIndex] = newProduct
   }
 
-  async findAll(): Promise<[] | Products[]> {
-    return this.items
+  async findAll(userId: string): Promise<[] | Products[]> {
+    return this.items.filter((item) => (item.user_Id = userId))
   }
 
   async findById(id: string): Promise<Products | null> {
     const product = this.items.find((product) => product.id === id)
-
     if (!product) return null
 
     return product
   }
 
-  async findByName(name: string): Promise<Products | null> {
-    const product = this.items.find((product) => product.name === name)
+  async findByName(name: string, userId: string): Promise<Products | null> {
+    const product = this.items.find(
+      (product) => product.name === name && product.user_Id === userId,
+    )
 
     if (!product) return null
 

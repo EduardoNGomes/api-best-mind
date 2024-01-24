@@ -16,8 +16,10 @@ export class PrismaProductsRepository implements ProductRepository {
     await this.prisma.products.update({ data, where: { id: data.id } })
   }
 
-  async findAll(): Promise<[] | Products[]> {
-    const allProducts = await this.prisma.products.findMany()
+  async findAll(userId: string): Promise<[] | Products[]> {
+    const allProducts = await this.prisma.products.findMany({
+      where: { user_Id: userId },
+    })
 
     return allProducts
   }
@@ -28,8 +30,10 @@ export class PrismaProductsRepository implements ProductRepository {
     return product
   }
 
-  async findByName(name: string): Promise<Products | null> {
-    const product = await this.prisma.products.findUnique({ where: { name } })
+  async findByName(name: string, userId: string): Promise<Products | null> {
+    const product = await this.prisma.products.findUnique({
+      where: { name_user_Id: { name, user_Id: userId } },
+    })
 
     return product
   }
