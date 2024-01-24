@@ -11,8 +11,10 @@ import cookie from '@fastify/cookie'
 export const app = fastify()
 
 app.register(multer.contentParser)
+
 app.register(JWT, {
   secret: env.SECRET_KEY,
+  cookie: { cookieName: 'token', signed: false },
 })
 app.register(cookie)
 app.register(Routes)

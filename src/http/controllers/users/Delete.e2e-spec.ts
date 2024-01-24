@@ -3,8 +3,11 @@ import { app } from '@/server'
 import { Users } from '@prisma/client'
 import userFactory from '../../../../test/factories/user'
 import { prisma } from '@/repositories/prisma/connection'
+import { EncrypterJWT } from '@/cryptography/jwt/EncrypterJWT'
 
 let MockUser: Users
+let token: string
+let tokenEncrypter: EncrypterJWT
 
 describe('[DELETE]/user/:id', async () => {
   beforeAll(async () => {
@@ -16,6 +19,9 @@ describe('[DELETE]/user/:id', async () => {
     })
 
     await prisma.users.create({ data: MockUser })
+    tokenEncrypter = new EncrypterJWT()
+
+    token = await tokenEncrypter.encrypt({ sub: MockUser.id })
   })
 
   afterAll(async () => {
@@ -23,7 +29,9 @@ describe('[DELETE]/user/:id', async () => {
   })
 
   it('should delete user', async () => {
-    const response = await request(app.server).delete(`/user/${MockUser.id}`)
+    const response = await request(app.server)
+      .delete(`/user/${MockUser.id}`)
+      .set('Cookie', `token=${token};`)
 
     expect(response.status).toEqual(200)
   })
