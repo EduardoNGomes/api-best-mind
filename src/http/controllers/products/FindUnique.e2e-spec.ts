@@ -6,7 +6,7 @@ import { prisma } from '@/repositories/prisma/connection'
 
 let MockProduct: Products
 
-describe('[PUTCH]/product/:id', async () => {
+describe('[GET]/product/:id', async () => {
   beforeAll(async () => {
     await app.ready()
 
@@ -19,16 +19,15 @@ describe('[PUTCH]/product/:id', async () => {
     await app.close()
   })
 
-  it('should delete user', async () => {
-    const response = await request(app.server)
-      .put(`/product/${MockProduct.id}`)
-      .field('name', 'Product Updated')
+  it('should get unique user', async () => {
+    const response = await request(app.server).get(`/product/${MockProduct.id}`)
 
-    const updatedProduct = await prisma.products.findUnique({
-      where: { id: MockProduct.id },
+    expect(response.body).toEqual({
+      product: expect.objectContaining({
+        name: MockProduct.name,
+        description: MockProduct.description,
+        price: MockProduct.price,
+      }),
     })
-
-    expect(response.status).toEqual(200)
-    if (updatedProduct) expect(updatedProduct.name).toEqual('Product Updated')
   })
 })
