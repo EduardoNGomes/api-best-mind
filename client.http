@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:3333
+@baseUrl = http://localhost:8080
 
 # @name create_product
 
@@ -50,15 +50,13 @@ Content-Type: application/json
 
 # @name update_product
 
-PUT {{baseUrl}}/product/1a7adaf0-5ff6-49c1-8536-7b113879893d
+PUT {{baseUrl}}/product/d039b1ff-48f8-484e-9a6b-ab5ccb640095
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="image"; filename="headphones.jpg"
-Content-Type: image/jpeg
+< ------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
 
-< ./assets/headphone.jpg
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
+headphones
 
 #####
 

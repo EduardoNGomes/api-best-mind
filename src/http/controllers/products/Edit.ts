@@ -17,13 +17,11 @@ export async function EditProductController(
     description: z.string().optional(),
     price: z.coerce.number().optional(),
   })
-  const createProductFileSchema = z.object({
-    filename: z.string().optional(),
-  })
 
   const { id } = EditProductParamsSchema.parse(request.params)
   const { name, description, price } = EditProductBodySchema.parse(request.body)
-  const { filename } = createProductFileSchema.parse(request.file)
+
+  const filename = request.file?.filename || undefined
 
   const repository = new PrismaProductsRepository(prisma)
   const uploader = new UploaderMulter()
