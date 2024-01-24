@@ -6,6 +6,7 @@ import { UPLOADS_FOLDER } from './config/multer'
 import { join } from 'path'
 import staticFiles from '@fastify/static'
 import JWT from '@fastify/jwt'
+import cookie from '@fastify/cookie'
 
 export const app = fastify()
 
@@ -13,6 +14,7 @@ app.register(multer.contentParser)
 app.register(JWT, {
   secret: env.SECRET_KEY,
 })
+app.register(cookie)
 app.register(Routes)
 
 app.register(staticFiles, {

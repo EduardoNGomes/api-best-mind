@@ -27,6 +27,7 @@ describe('[POST]/auth ', async () => {
       .post('/auth')
       .send({ email: MockUser.email, password: '123456' })
 
+    expect(response.headers).toHaveProperty('set-cookie')
     expect(response.body).toHaveProperty('accessToken')
   })
 })

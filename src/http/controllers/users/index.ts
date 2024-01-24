@@ -6,7 +6,19 @@ import { EditUserController } from './Edit'
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post('/user', CreateUserController)
-  app.get('/user/:id', FindUserByIdController)
-  app.delete('/user/:id', DeleteUserController)
-  app.put('/user/:id', EditUserController)
+  app.get(
+    '/user/:id',
+    { onRequest: (request) => request.jwtVerify({ onlyCookie: true }) },
+    FindUserByIdController,
+  )
+  app.delete(
+    '/user/:id',
+    { onRequest: (request) => request.jwtVerify({ onlyCookie: true }) },
+    DeleteUserController,
+  )
+  app.put(
+    '/user/:id',
+    { onRequest: (request) => request.jwtVerify({ onlyCookie: true }) },
+    EditUserController,
+  )
 }

@@ -32,5 +32,14 @@ export async function AuthenticateController(
     return reply.status(409).send(result.value)
   }
 
-  reply.status(201).send(result.value)
+  return reply
+    .status(201)
+    .setCookie('token', result.value.accessToken, {
+      domain: 'your.domain',
+      path: '/',
+      secure: true,
+      httpOnly: true,
+      sameSite: true,
+    })
+    .send(result.value)
 }
