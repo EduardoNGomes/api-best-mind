@@ -37,6 +37,7 @@ describe('Edit Product', () => {
       image: product.image,
       createdAt: product.createdAt,
       updatedAt: expect.any(Date),
+      user_Id: product.user_Id,
     })
   })
 
@@ -52,6 +53,7 @@ describe('Edit Product', () => {
       image: 'image-update',
       createdAt: product.createdAt,
       updatedAt: expect.any(Date),
+      user_Id: product.user_Id,
     })
     expect(uploaderTest.items).toHaveLength(1)
     expect(uploaderTest.items[0]).toEqual('image-update')

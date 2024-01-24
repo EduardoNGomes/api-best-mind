@@ -20,6 +20,7 @@ describe('Create Product', () => {
       description: 'New Product description',
       price: 10,
       image: 'image-product.jpg',
+      userId: 'userIdTest',
     }
 
     const result = await sut.execute(newProduct)
@@ -41,6 +42,7 @@ describe('Create Product', () => {
       description: 'New Product description',
       price: 10,
       image: 'image-product.jpg',
+      userId: 'userIdTest',
     }
 
     await sut.execute(newProduct)

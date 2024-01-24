@@ -8,6 +8,7 @@ type CreateProductRequest = {
   description: string
   price: number
   image: string
+  userId: string
 }
 
 type CreateProductResponse = Either<ResourceAlreadyExistError, object>
@@ -23,8 +24,9 @@ export class CreateProductService {
     description,
     price,
     image,
+    userId,
   }: CreateProductRequest): Promise<CreateProductResponse> {
-    const productExist = await this.productRepository.findByName(name)
+    const productExist = await this.productRepository.findByName(name, userId)
 
     if (productExist) return left(new ResourceAlreadyExistError())
 
@@ -35,6 +37,7 @@ export class CreateProductService {
       description,
       price,
       image: imageSaved,
+      user_Id: userId,
     })
 
     return right({})
