@@ -18,6 +18,8 @@ export async function CreateProductController(
     filename: z.string(),
   })
 
+  const userId = request.user.sub
+
   const { name, description, price } = createProductBodySchema.parse(
     request.body,
   )
@@ -34,6 +36,7 @@ export async function CreateProductController(
     description,
     price,
     image: filename,
+    userId,
   })
 
   if (result.isLeft()) {

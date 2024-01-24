@@ -6,8 +6,8 @@ import { prisma } from '@/repositories/prisma/connection'
 import { EncrypterJWT } from '@/cryptography/jwt/EncrypterJWT'
 
 let MockUser: Users
-let token: string
-let tokenEncrypter: EncrypterJWT
+let MockToken: string
+let MockTokenEncrypter: EncrypterJWT
 
 describe('[PUT]/user/:id', async () => {
   beforeAll(async () => {
@@ -19,9 +19,9 @@ describe('[PUT]/user/:id', async () => {
     })
 
     await prisma.users.create({ data: MockUser })
-    tokenEncrypter = new EncrypterJWT()
+    MockTokenEncrypter = new EncrypterJWT()
 
-    token = await tokenEncrypter.encrypt({ sub: MockUser.id })
+    MockToken = await MockTokenEncrypter.encrypt({ sub: MockUser.id })
   })
 
   afterAll(async () => {
@@ -31,7 +31,7 @@ describe('[PUT]/user/:id', async () => {
   it('should update user', async () => {
     const response = await request(app.server)
       .put(`/user/${MockUser.id}`)
-      .set('Cookie', `token=${token};`)
+      .set('Cookie', `token=${MockToken};`)
       .send({ oldPassword: '123456', email: 'jonhDoeChanged@gmail.com' })
 
     const updatedUser = await prisma.users.findUnique({

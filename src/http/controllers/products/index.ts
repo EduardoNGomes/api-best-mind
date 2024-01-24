@@ -10,6 +10,14 @@ import { MULTER } from '@/config/multer'
 const upload = multer(MULTER)
 
 export async function productsRoutes(app: FastifyInstance) {
+  app.addHook('onRequest', async (request, reply) => {
+    try {
+      await request.jwtVerify({ onlyCookie: true })
+    } catch (err) {
+      reply.send(err)
+    }
+  })
+
   app.post(
     '/product',
     { preHandler: upload.single('image') },

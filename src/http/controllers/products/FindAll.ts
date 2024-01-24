@@ -12,7 +12,9 @@ export async function FindAllProductsController(
 
   const service = new FindAllProductService(repository)
 
-  const result = await service.execute()
+  const userId = request.user.sub
+
+  const result = await service.execute({ userId })
 
   if (result.isLeft()) {
     return reply.status(409).send(result.value)
