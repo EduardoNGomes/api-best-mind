@@ -5,6 +5,7 @@ export const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'production', 'test']).default('dev'),
   PORT: z.coerce.number(),
   SECRET_KEY: z.string(),
+  DOMAIN: z.string().default('http://localhost:5173'),
 })
 
 const _env = envSchema.safeParse(process.env)

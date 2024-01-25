@@ -8,10 +8,15 @@ import staticFiles from '@fastify/static'
 import JWT from '@fastify/jwt'
 import cookie from '@fastify/cookie'
 import { ZodError } from 'zod'
+import CORS from '@fastify/cors'
 
 export const app = fastify()
 
 app.register(multer.contentParser)
+app.register(CORS, {
+  origin: env.DOMAIN,
+  credentials: true,
+})
 
 app.register(JWT, {
   secret: env.SECRET_KEY,
