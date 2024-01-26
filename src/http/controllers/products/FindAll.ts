@@ -20,5 +20,33 @@ export async function FindAllProductsController(
     return reply.status(409).send(result.value)
   }
 
-  reply.status(200).send({ products: result.value.products })
+  const productResponse = result.value.products.map((product) => {
+    const response = {
+      ...product,
+      price: new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(product.price),
+      createdAt: new Intl.DateTimeFormat('pt-BR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC',
+      }).format(product.createdAt),
+      updatedAt: new Intl.DateTimeFormat('pt-BR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC',
+      }).format(product.updatedAt),
+    }
+
+    return response
+  })
+
+  reply.status(200).send({
+    products: productResponse,
+  })
 }
