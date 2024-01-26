@@ -1,5 +1,6 @@
 import { HasherComparerBcrypt } from '@/cryptography/bcrypt/HasherComparerBcrypt'
 import { EncrypterJWT } from '@/cryptography/jwt/EncrypterJWT'
+import { env } from '@/env'
 import { PrismaAuthenticateRepository } from '@/repositories/prisma/PrismaAuthenticateRepository'
 import { prisma } from '@/repositories/prisma/connection'
 import { AuthenticateUserService } from '@/services/authenticate/Authenticate'
@@ -35,11 +36,11 @@ export async function AuthenticateController(
   return reply
     .status(201)
     .setCookie('token', result.value.accessToken, {
-      domain: 'your.domain',
+      domain: env.DOMAIN_COOKIE,
       path: '/',
       secure: true,
       httpOnly: true,
-      sameSite: true,
+      sameSite: `none`,
     })
     .send(result.value)
 }

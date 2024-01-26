@@ -14,7 +14,7 @@ export async function productsRoutes(app: FastifyInstance) {
     try {
       await request.jwtVerify({ onlyCookie: true })
     } catch (err) {
-      reply.send(err)
+      reply.status(401).send(err)
     }
   })
 

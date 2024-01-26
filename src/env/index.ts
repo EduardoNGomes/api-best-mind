@@ -6,6 +6,7 @@ export const envSchema = z.object({
   PORT: z.coerce.number(),
   SECRET_KEY: z.string(),
   DOMAIN: z.string().default('http://localhost:5173'),
+  DOMAIN_COOKIE: z.string().default(''),
 })
 
 const _env = envSchema.safeParse(process.env)
