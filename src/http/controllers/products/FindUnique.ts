@@ -26,5 +26,15 @@ export async function FindProductByIdController(
     return reply.status(409).send(result.value)
   }
 
-  reply.status(200).send({ product: { ...result.value.products } })
+  const product = {
+    id: result.value.products.id,
+    name: result.value.products.name,
+    description: result.value.products.description,
+    image: result.value.products.image,
+    price: String(result.value.products.price.toFixed(2)).replace('.', ','),
+  }
+
+  reply.status(200).send({
+    product,
+  })
 }

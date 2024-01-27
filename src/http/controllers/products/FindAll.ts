@@ -30,14 +30,14 @@ export async function FindAllProductsController(
       createdAt: new Intl.DateTimeFormat('pt-BR', {
         weekday: 'long',
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric',
         timeZone: 'UTC',
       }).format(product.createdAt),
       updatedAt: new Intl.DateTimeFormat('pt-BR', {
         weekday: 'long',
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric',
         timeZone: 'UTC',
       }).format(product.updatedAt),
