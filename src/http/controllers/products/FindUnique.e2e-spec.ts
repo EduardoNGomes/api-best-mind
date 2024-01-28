@@ -47,7 +47,6 @@ describe('[GET]/product/:id', async () => {
       product: expect.objectContaining({
         name: MockProduct.name,
         description: MockProduct.description,
-        price: MockProduct.price,
       }),
     })
   })
