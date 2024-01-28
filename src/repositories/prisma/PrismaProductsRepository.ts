@@ -13,12 +13,16 @@ export class PrismaProductsRepository implements ProductRepository {
   }
 
   async update(data: ProductToUpdateProps): Promise<void> {
-    await this.prisma.products.update({ data, where: { id: data.id } })
+    await this.prisma.products.update({
+      data: { ...data, updatedAt: new Date() },
+      where: { id: data.id },
+    })
   }
 
   async findAll(userId: string): Promise<[] | Products[]> {
     const allProducts = await this.prisma.products.findMany({
       where: { user_Id: userId },
+      orderBy: { updatedAt: 'desc' },
     })
 
     return allProducts

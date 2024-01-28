@@ -13,7 +13,10 @@ export class PrismaUsersRepository implements UserRepository {
   }
 
   async update(data: UserToUpdateProps): Promise<void> {
-    await this.prisma.users.update({ data, where: { id: data.id } })
+    await this.prisma.users.update({
+      data: { ...data, updatedAt: new Date() },
+      where: { id: data.id },
+    })
   }
 
   async findById(id: string): Promise<Users | null> {
