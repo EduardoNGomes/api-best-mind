@@ -24,7 +24,7 @@ describe('[GET]/product', async () => {
 
     await prisma.users.create({ data: MockUser })
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 15; i++) {
       MockProduct = await productFactory.createProductToE2ETest({
         name: `product-${i}`,
         user_Id: MockUser.id,
@@ -41,12 +41,12 @@ describe('[GET]/product', async () => {
     await app.close()
   })
 
-  it('should get all products', async () => {
+  it('should get 5 products', async () => {
     const response = await request(app.server)
-      .get(`/product`)
+      .get(`/product?p=2`)
       .set('Cookie', `token=${MockToken};`)
 
     expect(response.status).toEqual(200)
-    expect(response.body.products).toHaveLength(10)
+    expect(response.body.products).toHaveLength(5)
   })
 })

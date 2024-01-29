@@ -3,6 +3,7 @@ import {
   ProductRepository,
   ProductToCreateProps,
   ProductToUpdateProps,
+  findAllProps,
 } from '../ProductRepository'
 
 export class PrismaProductsRepository implements ProductRepository {
@@ -19,10 +20,12 @@ export class PrismaProductsRepository implements ProductRepository {
     })
   }
 
-  async findAll(userId: string): Promise<[] | Products[]> {
+  async findAll({ userId, p }: findAllProps): Promise<[] | Products[]> {
     const allProducts = await this.prisma.products.findMany({
       where: { user_Id: userId },
       orderBy: { updatedAt: 'desc' },
+      take: 10,
+      skip: (p - 1) * 10,
     })
 
     return allProducts
