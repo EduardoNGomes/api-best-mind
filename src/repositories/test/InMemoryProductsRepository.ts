@@ -3,7 +3,6 @@ import {
   ProductRepository,
   ProductToCreateProps,
   ProductToUpdateProps,
-  findAllProps,
 } from '../ProductRepository'
 import { randomUUID } from 'crypto'
 
@@ -36,10 +35,8 @@ export class InMemoryProductsRepository implements ProductRepository {
     this.items[productIndex] = newProduct
   }
 
-  async findAll({ userId, p }: findAllProps): Promise<[] | Products[]> {
-    return this.items
-      .filter((item) => (item.user_Id = userId))
-      .slice((p - 1) * 10, p * 10)
+  async findAll(userId: string): Promise<[] | Products[]> {
+    return this.items.filter((item) => (item.user_Id = userId))
   }
 
   async findById(id: string): Promise<Products | null> {

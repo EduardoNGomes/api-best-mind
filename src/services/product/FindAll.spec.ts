@@ -16,7 +16,7 @@ describe('Find All Products', () => {
     sut = new FindAllProductService(inMemoryProductsRepository)
     let product: Products
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 10; i++) {
       product = ProductFactory.createProductToUnitTest({
         id: `${i}`,
         user_Id: userId,
@@ -26,18 +26,11 @@ describe('Find All Products', () => {
     }
   })
 
-  it('should find 10 product', async () => {
+  it('should find all exists product', async () => {
     const result = await sut.execute({ userId })
 
     expect(result.isRight()).toBeTruthy()
     expect(result.value?.products).toHaveLength(10)
-  })
-
-  it('should find 5 product', async () => {
-    const result = await sut.execute({ userId, p: 2 })
-
-    expect(result.isRight()).toBeTruthy()
-    expect(result.value?.products).toHaveLength(5)
   })
 
   it('shouldnt find exists product from another user', async () => {

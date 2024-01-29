@@ -3,25 +3,18 @@ import { prisma } from '@/repositories/prisma/connection'
 import { FindAllProductService } from '@/services/product/FindAll'
 
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { z } from 'zod'
 
 export async function FindAllProductsController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const findAllProductQueySchema = z.object({
-    p: z.coerce.number().default(1),
-  })
-
-  const { p } = findAllProductQueySchema.parse(request.query)
-
   const repository = new PrismaProductsRepository(prisma)
 
   const service = new FindAllProductService(repository)
 
   const userId = request.user.sub
 
-  const result = await service.execute({ userId, p })
+  const result = await service.execute({ userId })
 
   if (result.isLeft()) {
     return reply.status(409).send(result.value)

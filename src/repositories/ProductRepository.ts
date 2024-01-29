@@ -10,15 +10,10 @@ export type ProductToUpdateProps = {
   image?: string
 }
 
-export type findAllProps = {
-  userId: string
-  p: number
-}
-
 export abstract class ProductRepository {
   abstract create(data: ProductToCreateProps): Promise<void>
   abstract update(data: ProductToUpdateProps): Promise<void>
-  abstract findAll({ userId, p }: findAllProps): Promise<Products[] | []>
+  abstract findAll(userId: string): Promise<Products[] | []>
   abstract findById(id: string): Promise<Products | null>
   abstract findByName(name: string, userId: string): Promise<Products | null>
   abstract delete(id: string): Promise<void>
