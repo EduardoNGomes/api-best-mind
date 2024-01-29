@@ -4,4 +4,4 @@ tmp/uploads/*
 tmp/*.jpg
 coverage
 build
-prisma/vitest-environment-prisma/node_modules
+dist
