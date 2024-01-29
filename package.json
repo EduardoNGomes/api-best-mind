@@ -5,12 +5,14 @@
   "main": "index.ts",
   "scripts": {
     "dev": "tsx --watch ./src/index.ts",
+    "start":"node ./build/index.js",
     "test": "vitest --run",
+    "build": "tsup src --out-dir build",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "vitest run --config ./vite.config.e2e.mts",
     "test:e2e:watch": "vitest --config ./vite.config.e2e.mts",
-    "migrate": "pnpm prisma migrate dev",
+    "migrate": "prisma migrate dev",
     "lint": "eslint src --fix"
   },
   "keywords": [],
