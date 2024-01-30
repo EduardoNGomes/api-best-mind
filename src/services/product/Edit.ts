@@ -2,6 +2,7 @@ import { Either, left, right } from '@/erros/either'
 import { ProductRepository } from '@/repositories/ProductRepository'
 import { ResourceNotFoundError } from '../erros/ResourceNotFoundError'
 import { Uploader } from '@/storage/uploader'
+import { ImageCannotBeSavedError } from '../erros/ImageCannotBeSavedError'
 
 type EditProductRequest = {
   id: string
@@ -11,7 +12,10 @@ type EditProductRequest = {
   image?: string
 }
 
-type EditProductResponse = Either<ResourceNotFoundError, object>
+type EditProductResponse = Either<
+  ResourceNotFoundError | ImageCannotBeSavedError,
+  object
+>
 
 export class EditProductService {
   constructor(
@@ -35,6 +39,7 @@ export class EditProductService {
     if (image) {
       await this.uploader.delete(product.image)
       imageUpdated = await this.uploader.save(image)
+      if (!imageUpdated) return left(new ImageCannotBeSavedError())
     }
 
     await this.productRepository.update({

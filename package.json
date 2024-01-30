@@ -10,9 +10,9 @@
   "packageManager": "pnpm@8.4.0",
   "scripts": {
     "dev": "tsx --watch ./src/index.ts",
-    "start":"node ./build/index.js",
+    "start":"node ./build/src/index.js",
     "test": "vitest --run",
-    "build": "tsup src --out-dir build",
+    "build": "tsup src --no-config",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "vitest run --config ./vite.config.e2e.mts",
