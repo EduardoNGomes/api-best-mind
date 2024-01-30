@@ -1,5 +1,7 @@
 import { PrismaProductsRepository } from '@/repositories/prisma/PrismaProductsRepository'
 import { prisma } from '@/repositories/prisma/connection'
+import { ImageCannotBeSavedError } from '@/services/erros/ImageCannotBeSavedError'
+import { ResourceAlreadyExistError } from '@/services/erros/ResourceAlreadyExistError'
 import { CreateProductService } from '@/services/product/Create'
 import { UploaderMulter } from '@/storage/multer/UploaderMulter'
 import { FastifyReply, FastifyRequest } from 'fastify'
@@ -40,7 +42,13 @@ export async function CreateProductController(
   })
 
   if (result.isLeft()) {
-    return reply.status(409).send(result.value)
+    if (result.value instanceof ImageCannotBeSavedError) {
+      return reply.status(500).send(result.value)
+    }
+
+    if (result.value instanceof ResourceAlreadyExistError) {
+      return reply.status(409).send(result.value)
+    }
   }
 
   reply.status(201).send()

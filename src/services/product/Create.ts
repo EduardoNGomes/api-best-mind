@@ -2,6 +2,7 @@ import { Either, left, right } from '@/erros/either'
 import { ProductRepository } from '@/repositories/ProductRepository'
 import { ResourceAlreadyExistError } from '../erros/ResourceAlreadyExistError'
 import { Uploader } from '@/storage/uploader'
+import { ImageCannotBeSavedError } from '../erros/ImageCannotBeSavedError'
 
 type CreateProductRequest = {
   name: string
@@ -11,7 +12,10 @@ type CreateProductRequest = {
   userId: string
 }
 
-type CreateProductResponse = Either<ResourceAlreadyExistError, object>
+type CreateProductResponse = Either<
+  ResourceAlreadyExistError | ImageCannotBeSavedError,
+  object
+>
 
 export class CreateProductService {
   constructor(
@@ -31,6 +35,8 @@ export class CreateProductService {
     if (productExist) return left(new ResourceAlreadyExistError())
 
     const imageSaved = await this.uploader.save(image)
+
+    if (!imageSaved) return left(new ImageCannotBeSavedError())
 
     await this.productRepository.create({
       name,
