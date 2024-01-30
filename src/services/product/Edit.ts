@@ -44,7 +44,7 @@ export class EditProductService {
 
     await this.productRepository.update({
       id,
-      name,
+      name: name?.toLowerCase(),
       description,
       price,
       image: imageUpdated,

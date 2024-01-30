@@ -25,7 +25,9 @@ export class AuthenticateUserService {
     email,
     password,
   }: AuthenticateUserRequest): Promise<AuthenticateUserResponse> {
-    const user = await this.authenticateRepository.findByEmail({ email })
+    const user = await this.authenticateRepository.findByEmail({
+      email: email.toLowerCase(),
+    })
 
     if (!user) return left(new WrongCredentialsError())
 

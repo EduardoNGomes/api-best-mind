@@ -32,7 +32,10 @@ export class CreateProductService {
     image,
     userId,
   }: CreateProductRequest): Promise<CreateProductResponse> {
-    const productExist = await this.productRepository.findByName(name, userId)
+    const productExist = await this.productRepository.findByName(
+      name.toLowerCase(),
+      userId,
+    )
 
     if (productExist) return left(new ResourceAlreadyExistError())
 
@@ -42,7 +45,7 @@ export class CreateProductService {
 
     await this.productRepository.create({
       id,
-      name,
+      name: name.toLowerCase(),
       description,
       price,
       image: imageSaved,

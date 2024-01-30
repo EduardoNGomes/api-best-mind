@@ -30,7 +30,7 @@ export class CreateUserService {
 
     await this.userRepository.create({
       name,
-      email,
+      email: email.toLowerCase(),
       password: hashedPassword,
     })
 

@@ -122,7 +122,7 @@ Date: Tue, 30 Jan 2024 17:11:14 GMT
 Connection: close
 
 {
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3YTI0M2RjNC0wODM3LTRiYjAtYjAwMy1lYzU3YmYzOTRhNTUiLCJpYXQiOjE3MDY2MzQ2NzQsImV4cCI6MTcwNjcyMTA3NH0.sjXvDI1UP_-1UlRYOglS08md6ndWwQ56wghwPGEdJvA"
+
 }
 ```
 
@@ -272,6 +272,8 @@ Connection: close
 <br>
 
 #### O arquivo client.http é um arquivo utilizado para fazer todas as possíveis chamadas para a API. Para utiliza-lo, basta ter a extensão [RestClient](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+#### Você tambem pode rodar os testes se necessário, basta rodar o comando `pnpm test` para testes unitários e `pnpm test:e2e` para testes E2E - OBS, para rodas os testes E2E é necessário estar com o docker compose rodando
 
 #### Para testar toda aplicacao utilize também o Front-End [Best Mind](https://github.com/EduardoNGomes/front-best-mind)
 

@@ -42,7 +42,9 @@ export class EditUserService {
     if (!userIsValid) return left(new WrongCredentialsError())
 
     if (newEmail) {
-      const emailAlreadyExists = await this.userRepository.findByEmail(newEmail)
+      const emailAlreadyExists = await this.userRepository.findByEmail(
+        newEmail.toLowerCase(),
+      )
 
       if (emailAlreadyExists) return left(new ResourceAlreadyExistError())
     }
@@ -56,7 +58,7 @@ export class EditUserService {
     await this.userRepository.update({
       id,
       name: name || user.name,
-      email,
+      email: email.toLowerCase(),
       password,
     })
 
