@@ -14,4 +14,7 @@ export const MULTER = {
       return cb(null, filename)
     },
   }),
+  limits: {
+    fileSize: 1024 * 1024 * 6, // 6 megabytes em bytes
+  },
 }

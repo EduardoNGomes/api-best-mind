@@ -92,7 +92,7 @@ Content-Type: application/json
 
 #####
 
-# @name edit_user
+# @name delete_user
 
 DELETE  {{baseUrl}}/user/7902ef55-379a-4497-9475-a5e2a296857a
 Content-Type: application/json
