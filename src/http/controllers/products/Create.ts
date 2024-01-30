@@ -12,6 +12,7 @@ export async function CreateProductController(
   reply: FastifyReply,
 ) {
   const createProductBodySchema = z.object({
+    id: z.string().uuid(),
     name: z.string(),
     description: z.string(),
     price: z.coerce.number(),
@@ -22,7 +23,7 @@ export async function CreateProductController(
 
   const userId = request.user.sub
 
-  const { name, description, price } = createProductBodySchema.parse(
+  const { name, description, price, id } = createProductBodySchema.parse(
     request.body,
   )
 
@@ -34,6 +35,7 @@ export async function CreateProductController(
   const service = new CreateProductService(repository, uploader)
 
   const result = await service.execute({
+    id,
     name,
     description,
     price,

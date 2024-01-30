@@ -28,6 +28,6 @@ describe('[POST]/auth ', async () => {
       .send({ email: MockUser.email, password: '123456' })
 
     expect(response.headers).toHaveProperty('set-cookie')
-    expect(response.body).toHaveProperty('accessToken')
+    expect(response.status).toEqual(201)
   })
 })

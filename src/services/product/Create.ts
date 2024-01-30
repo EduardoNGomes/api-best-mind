@@ -5,6 +5,7 @@ import { Uploader } from '@/storage/uploader'
 import { ImageCannotBeSavedError } from '../erros/ImageCannotBeSavedError'
 
 type CreateProductRequest = {
+  id: string
   name: string
   description: string
   price: number
@@ -24,6 +25,7 @@ export class CreateProductService {
   ) {}
 
   async execute({
+    id,
     name,
     description,
     price,
@@ -39,6 +41,7 @@ export class CreateProductService {
     if (!imageSaved) return left(new ImageCannotBeSavedError())
 
     await this.productRepository.create({
+      id,
       name,
       description,
       price,

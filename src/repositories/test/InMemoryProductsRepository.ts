@@ -10,7 +10,7 @@ export class InMemoryProductsRepository implements ProductRepository {
   items: Products[] = []
 
   async create(data: ProductToCreateProps): Promise<void> {
-    const id = randomUUID()
+    const id = data.id ?? randomUUID()
     const createdAt = new Date()
     const updatedAt = new Date()
 

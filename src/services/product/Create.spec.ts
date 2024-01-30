@@ -1,6 +1,7 @@
 import { InMemoryProductsRepository } from '@/repositories/test/InMemoryProductsRepository'
 import { CreateProductService } from './Create'
 import { UploaderTest } from '@/storage/test/UploaderTest'
+import { randomUUID } from 'node:crypto'
 
 let sut: CreateProductService
 let inMemoryProductsRepository: InMemoryProductsRepository
@@ -16,6 +17,7 @@ describe('Create Product', () => {
 
   it('should create a new product', async () => {
     const newProduct = {
+      id: randomUUID(),
       name: 'New Product',
       description: 'New Product description',
       price: 10,
@@ -38,6 +40,7 @@ describe('Create Product', () => {
   })
   it('shouldnt create a new product if the product already exist on database', async () => {
     const newProduct = {
+      id: randomUUID(),
       name: 'New Product',
       description: 'New Product description',
       price: 10,

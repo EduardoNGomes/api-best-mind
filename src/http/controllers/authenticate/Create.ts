@@ -42,5 +42,5 @@ export async function AuthenticateController(
       httpOnly: true,
       sameSite: `none`,
     })
-    .send(result.value)
+    .send()
 }
